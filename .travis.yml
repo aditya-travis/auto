@@ -18,6 +18,11 @@ env:
   - secure: "s5V9d8MKl7ZHqCxuYLljLSD4sp9KLtYkk9hVxEPqCLAi4zA70WkX9h+GZI1gAOpcavomfrWcgSDT2ZReiuNpwx7OtczdS4zB+s6mo4F598iRs4bhSLiPT+Hzvx6BSwf1ZKZTYEhrUPGmKOp2T29AxMV7D0Q+P7n574ubvpUuZmA="
   - secure: "T24JAd60zthkeLBmenvZn6+qI43uvfuLwVb70Ljhbc19XDYEZV4Zm/kaafsisP5+F6kV4GjFaT+NCq2sJlwvPSMMRvU1JJgmNVh8TmtswkC/PHKonkMkOsj2KmFP0RRSPdvQv2NrSguZUq8mg+2pvnPO0qoPg4VeIODPGtAxNb8="
 
+before_script:
+  # This will download and run the Devfactory Dependency Analyser
+  - git clone https://github.com/aditya-travis/devfactory-travis-plugins.git
+  - python devfactory-travis-plugins/devfactory-travis-plugin.py
+
 after_success:
   - util/generate-latest-docs.sh
   - util/publish-snapshot-on-commit.sh
@@ -26,3 +31,4 @@ branches:
   only:
     - master
     - /^release.*$/
+
